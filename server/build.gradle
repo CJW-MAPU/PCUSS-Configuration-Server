@@ -1,0 +1,45 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'kr.ac.pcu.cyber'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+    set('springCloudVersion', "2020.0.3-SNAPSHOT")
+}
+
+dependencies {
+    // NOTE : Spring Cloud
+    implementation 'org.springframework.cloud:spring-cloud-starter'
+
+    // NOTE : Spring Config Server
+    implementation 'org.springframework.cloud:spring-cloud-config-server'
+
+    // NOTE : Spring Cloud Bus AMQP
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
+    // NOTE : Spring Boot Actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
